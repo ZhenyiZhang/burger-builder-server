@@ -58,6 +58,8 @@ DB.once('open', () => {
 DB.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 /*listen on port*/
-app.listen(PORT, () => console.log('server started on port ' + PORT));
+/*listen on port*/
+const port = process.env.PORT || PORT;
+app.listen(port, () => console.log('server started on port ' + PORT));
 
 module.exports = app;
