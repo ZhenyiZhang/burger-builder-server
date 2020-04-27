@@ -4,7 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
-const PORT = 5000;
+const PORT = 5001;
 const orderRoute = require('./routes/order');
 const cors = require('cors');
 
