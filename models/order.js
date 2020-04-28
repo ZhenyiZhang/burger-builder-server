@@ -14,6 +14,10 @@ const OrderSchema = new Schema({
         type: String,
         required: true
     },
+    status: {
+        type: String,
+        default: 'Pending'
+    },
     timeOrdered: {
         type: Date,
         required: false
@@ -36,5 +40,4 @@ OrderSchema.methods.getOrderNumber = function uniqueNumber () {
     this.orderNumber = date;
 };
 
-
-module.exports = mongoose.model('Order', OrderSchema);
+module.exports = exports = mongoose.model('Order', OrderSchema);

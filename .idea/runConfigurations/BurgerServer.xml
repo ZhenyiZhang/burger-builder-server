@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="BurgerServer" type="NodeJSConfigurationType" path-to-node="node" path-to-js-file="bin/www" working-dir="$PROJECT_DIR$">
+  <configuration default="false" name="BurgerServer" type="NodeJSConfigurationType" path-to-node="$PROJECT_DIR$/node_modules/nodemon/bin/nodemon.js" path-to-js-file="bin/www" working-dir="$PROJECT_DIR$">
     <envs>
       <env name="DEBUG" value="burgerbuilderserver:*" />
     </envs>
