@@ -2,15 +2,25 @@ const express = require('express');
 const router = express.Router();
 const Orders = require('../models/order');
 const orderStatus = require('../variables/orderStatus');
+const Axios = require('axios');
+
+const streamServer = Axios.create({
+    baseURL: 'http://localhost:3001/nest'
+});
 /*post order to database*/
 router.post('/', async(req,res) => {
+    /*receive order from client*/
     const data = Object.assign({}, req.body,);
     const newOrder = await new Orders(data);
     newOrder.getOrderNumber();
     Orders.create(newOrder)
-        .then((result)=> {
-            res.json(result);
-        })
+        .then((result)=> {res.json(result);})
+        .catch(err => {res.json(err)});
+    /*notify push stream server*/
+    const notifyBody = {update: 'all'};
+    streamServer.post('', notifyBody)
+        .then(a => console.log(a))
+        .then(err => console.log(err));
 });
 
 router.get('/', async(req,res) => {
@@ -37,6 +47,11 @@ router.post('/confirmed/:orderNumber', async(req,res) => {
     ).then(() => {
         res.status(200).send('order confirmed !')})
         .catch(err => res.send(err));
+    /*notify push stream server*/
+    const notifyBody = {update: req.params.orderNumber};
+    streamServer.post('', notifyBody)
+        .then(a => console.log(a))
+        .then(err => console.log(err));
 });
 
 router.post('/completed/:orderNumber', async(req,res) => {
@@ -46,6 +61,11 @@ router.post('/completed/:orderNumber', async(req,res) => {
     ).then(() => {
         res.status(200).send('order confirmed !')})
         .catch(err => res.send(err));
+    /*notify push stream server*/
+    const notifyBody = {update: req.params.orderNumber};
+    streamServer.post('', notifyBody)
+        .then(a => console.log(a))
+        .then(err => console.log(err));
 });
 
 router.post('/cancel/:orderNumber', async(req,res) => {
@@ -54,7 +74,12 @@ router.post('/cancel/:orderNumber', async(req,res) => {
         {status: orderStatus.Canceled}
     ).then(() => {
         res.status(200).send('order confirmed !')})
-        .catch(err => res.send(err));;
+        .catch(err => res.send(err));
+    /*notify push stream server*/
+    const notifyBody = {update: req.params.orderNumber};
+    streamServer.post('', notifyBody)
+        .then(a => console.log(a))
+        .then(err => console.log(err));
 });
 
 
@@ -65,6 +90,11 @@ router.post('/pickup/:orderNumber', async(req,res) => {
     )
         .then(() => {res.status(200).send('pick up is ready')})
         .catch(err => res.send(err));
+    /*notify push stream server*/
+    const notifyBody = {update: req.params.orderNumber};
+    streamServer.post('', notifyBody)
+        .then(a => console.log(a))
+        .then(err => console.log(err));
 });
 
 

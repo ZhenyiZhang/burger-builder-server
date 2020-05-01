@@ -8,7 +8,7 @@ const OrderSchema = new Schema({
     },
     items: {
         type: Object,
-        required: false
+        required: true
     },
     name: {
         type: String,
@@ -20,12 +20,15 @@ const OrderSchema = new Schema({
     },
     timeOrdered: {
         type: Date,
-        required: false
+        required: true
     },
     orderNumber: {
         type: String,
-        required: false
     },
+    price: {
+        type: Number,
+        required: true
+    }
 });
 
 OrderSchema.methods.getOrderNumber = function uniqueNumber () {
