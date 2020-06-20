@@ -43,7 +43,7 @@ app.use(function(err, req, res, next) {
 });
 
 /*mongodb config*/
-mongoose.connect('mongodb://bruce:burger2020@ds261648.mlab.com:61648/burger_order', {
+mongoose.connect('mongodb://127.0.0.1:27017/burger-builder', {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   useCreateIndex: true
